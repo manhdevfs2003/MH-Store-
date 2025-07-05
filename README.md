@@ -1,5 +1,6 @@
 # FullFashionSellerWeb 👗
 
+<<<<<<< HEAD
 Một hệ thống thương mại điện tử thời trang hoàn chỉnh được xây dựng với **MERN Stack** (MongoDB, Express.js, React, Node.js).
 
 ## 📋 Tổng quan
@@ -296,6 +297,14 @@ Nếu bạn gặp vấn đề hoặc có câu hỏi, vui lòng:
 - Join Discord server (nếu có)
 
 ---
+=======
+
+## Front-end
+- [React](https://es.reactjs.org/) - Front-End JavaScript library
+- [Windi CSS](https://windicss.org/) - Next generation utility-first CSS framework
+- [Feather Icons](https://feathericons.com/) - Simply beautiful open source icons
+- [Vite](https://vitejs.dev/) - Frontend Tooling
+>>>>>>> f2b171ca723e543d145c1759a865e31019e356f4
 
 ⭐ **Nếu project này hữu ích, hãy cho một star!** ⭐
 

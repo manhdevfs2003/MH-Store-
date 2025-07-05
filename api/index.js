@@ -28,6 +28,11 @@ app.use(cors());
 app.use(express.json());
 app.use(handleMalformedJson); // handle common req errors
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
 // routes
 app.use("/auth", authRouter);
 app.use("/users", userRouter);

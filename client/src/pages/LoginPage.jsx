@@ -7,21 +7,20 @@ import api from '@/api'
 import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
-	const {cart} = useContext(CartContext)
+	const {cart, cartDispatch} = useContext(CartContext)
 	const {setUser} = useContext(UserContext)
 	const navigate = useNavigate()
 
 	const handleLogin = async userData => {
 		const resp = await api.loginUser(userData)
 		if (resp.status == "ok") {
-			if (cart.products.length) {
-				await api.addProductsToCart(cart.products.map(p => ({
-					productID: p.id,
-					quantity: p.quantity
-				})))
-			}
 			setUser(api.getUser())
-			if (cart.products.length) {
+			const cartResp = await api.getUserCart()
+			console.log("Cart Response:", cartResp)
+			if (cartResp.products) {
+				cartDispatch({type: "SET_PRODUCTS", payload: cartResp.products})
+			}
+			if (cartResp.products.length) {
 				navigate("/cart")
 			} else {
 				navigate("/account")

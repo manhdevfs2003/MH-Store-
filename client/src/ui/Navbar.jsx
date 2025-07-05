@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import clsx from "clsx"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Menu, Search, User, LogIn, X, ShoppingCart } from "react-feather"
 
 import { UserContext, CartContext } from '@/App'
@@ -9,12 +9,15 @@ import Input from "@/components/Input"
 import UserDropDown from '@/components/UserDropDown'
 import api from "@/api"
 import useClickOutside from '@/hooks/useClickOutside'
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 export default function Navbar() {
-	const {user, setUser} = useContext(UserContext)
-	const {cart, cartDispatch} = useContext(CartContext)
+	const { user, setUser } = useContext(UserContext)
+	const { cart, cartDispatch } = useContext(CartContext)
 	const [showMenu, setShowMenu] = useState(false)
 	const navbarRef = useClickOutside(() => setShowMenu(false))
+
+	
 
 	return (
 		<nav className={clsx(
@@ -40,20 +43,20 @@ export default function Navbar() {
 						: null
 					}
 				</Link>
-				{user && 
-					<UserDropDown 
-						user={user} 
+				{user &&
+					<UserDropDown
+						user={user}
 						onLogout={() => {
 							api.logoutUser()
 							setUser(null)
-							cartDispatch({type: "RESET"})
-						}} 
+							cartDispatch({ type: "RESET" })
+						}}
 					/>
 				}
 				<button className="md:hidden flex items-center focus:outline-none">
-					{showMenu 
+					{showMenu
 						? <X width={24} height={24} onClick={() => setShowMenu(false)} />
-						:	<Menu width={24} height={24} onClick={() => setShowMenu(true)} />
+						: <Menu width={24} height={24} onClick={() => setShowMenu(true)} />
 					}
 				</button>
 			</div>
@@ -73,34 +76,31 @@ export default function Navbar() {
 					<NavLink to="/products">All Products</NavLink>
 				</ul>
 				<div className="flex items-center order-1 md:order-2">
-					<Input 
-						className="md:max-w-min bg-opacity-40" 
-						icon={<Search />} 
-						placeholder="Search..." 
-					/>
+				<SearchAutocomplete />
+
 				</div>
-			{!user && (
-				<ul className={clsx(
-					"flex flex-col order-3",
-					showMenu && "mt-4",
-					"md:(flex-row text-base mt-0 space-x-2)"
-				)}>
-					<li>
-						<Link to="/login">
-							<Button secondary className="w-full md:w-auto">
-								<LogIn width={20} height={20} className="mr-2" />Login
-							</Button>
-						</Link>
-					</li>
-					<li>
-						<Link to="/register">
-							<Button className="w-full md:w-auto">
-								<User width={20} height={20} className="mr-2" />Register
-							</Button>
-						</Link>
-					</li>
-				</ul>
-			)}
+				{!user && (
+					<ul className={clsx(
+						"flex flex-col order-3",
+						showMenu && "mt-4",
+						"md:(flex-row text-base mt-0 space-x-2)"
+					)}>
+						<li>
+							<Link to="/login">
+								<Button secondary className="w-full md:w-auto">
+									<LogIn width={20} height={20} className="mr-2" />Login
+								</Button>
+							</Link>
+						</li>
+						<li>
+							<Link to="/register">
+								<Button className="w-full md:w-auto">
+									<User width={20} height={20} className="mr-2" />Register
+								</Button>
+							</Link>
+						</li>
+					</ul>
+				)}
 			</div>
 		</nav>
 	)

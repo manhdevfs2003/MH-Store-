@@ -63,12 +63,19 @@ async function createUserCart(products) {
 
 async function getUserCart() {
   const userID = getUser()._id;
+  console.log("UserID:", userID);
+  const token = getAccessToken();
+
+  console.log("Access Token:", token); // 👈 dòng cần thêm để xem token
+
   const resp = await fetch(API_URL + "/carts/" + userID, {
     headers: {
       "x-access-token": getAccessToken(),
     },
   });
+  console.log("Response:", resp);
   const cart = await resp.json();
+  console.log("Cart:", cart);
   if (cart.products) {
     cart.products = cart.products.map((product) => ({
       id: product.productID._id,
@@ -78,19 +85,27 @@ async function getUserCart() {
       quantity: product.quantity,
     }));
   }
+  console.log("Cart:", cart);
   return cart;
 }
 
 async function addProductsToCart(products) {
   const userID = getUser()._id;
+  const sanitizedProducts = products.map((p) => ({
+    productID: String(p.productID || p.id), // fallback nếu gọi từ sản phẩm FE
+    quantity: p.quantity || 1,
+  }));
+
   const resp = await fetch(API_URL + "/carts/" + userID, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "x-access-token": getAccessToken(),
     },
-    body: JSON.stringify({ products }),
+    body: JSON.stringify({ products: sanitizedProducts }),
   });
+  console.log("Đang gửi addProductsToCart:", products);
+
   return await resp.json();
 }
 
@@ -204,6 +219,14 @@ async function fetchOrderDetails(orderID) {
   });
   return await resp.json();
 }
+async function get(url) {
+  const resp = await fetch(API_URL + url);
+  return await resp.json();
+}
+
+async function searchProducts(q) {
+  return await get(`/products/search?q=${encodeURIComponent(q)}`);
+}
 
 export default {
   registerUser,
@@ -223,4 +246,6 @@ export default {
   createOrder,
   fetchAllOrders,
   fetchOrderDetails,
+  get, // ✅ thêm dòng này
+  searchProducts,
 };

@@ -141,23 +141,30 @@ npm run dev
 
 ## 🌐 Truy cập ứng dụng
 
-### 🛍️ Client (Khách hàng):
+### 🌍 **Production (Live Demo):**
 
-**URL:** [http://localhost:3000](http://localhost:3000)
+#### 🛍️ Client (Khách hàng):
+**URL:** [https://mh-store-client.vercel.app](https://mh-store-client.vercel.app)
 
-- Trang chủ với carousel sản phẩm
-- Danh mục sản phẩm (Nam/Nữ/Unisex)
-- Giỏ hàng và thanh toán
-- Tài khoản và đơn hàng
-
-### 👨‍💼 Admin Panel:
-
-**URL:** [http://localhost:5174](http://localhost:5174)
+#### 👨‍💼 Admin Panel:
+**URL:** [https://mh-store-admin.vercel.app](https://mh-store-admin.vercel.app)
 
 **Tài khoản Admin:**
-
 - **Email:** `admintest@gmail.com`
 - **Mật khẩu:** `123456`
+
+#### ⚙️ API Backend:
+**URL:** [https://mh-store-api.onrender.com](https://mh-store-api.onrender.com)
+
+---
+
+### 💻 **Local Development:**
+
+#### 🛍️ Client (Khách hàng):
+**URL:** [http://localhost:3000](http://localhost:3000)
+
+#### 👨‍💼 Admin Panel:
+**URL:** [http://localhost:5174](http://localhost:5174)
 
 **Tính năng admin:**
 
@@ -269,6 +276,35 @@ admin-panel/
 2. Deploy frontend lên **Vercel/Netlify**
 3. Cấu hình **MongoDB Atlas** production
 4. Setup **domain** và **SSL certificates**
+
+## 🚀 Deployment
+
+### **Production Setup:**
+
+#### **Backend (Render):**
+1. Create account tại [render.com](https://render.com)
+2. Connect GitHub repository
+3. Create Web Service:
+   - **Root Directory:** `api`
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+   - **Environment Variables:** MONGO_URL, JWT_SECRET, STRIPE_SECRET
+
+#### **Frontend (Vercel):**
+1. Create account tại [vercel.com](https://vercel.com)
+2. Import GitHub repository (2 lần cho admin và client)
+3. **Admin Panel:**
+   - **Root Directory:** `admin-panel`
+   - **Framework:** Vite
+   - **Environment:** `VITE_API_URL=https://mh-store-api.onrender.com`
+4. **Client:**
+   - **Root Directory:** `client`
+   - **Framework:** Vite
+   - **Environment:** `VITE_API_URL=https://mh-store-api.onrender.com`
+
+#### **Auto-Deploy:**
+- Mỗi push lên `main` branch sẽ tự động trigger deployment
+- Vercel và Render đều hỗ trợ preview deployments cho pull requests
 
 ## 🤝 Contributing
 

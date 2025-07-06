@@ -15,13 +15,30 @@ const { handleMalformedJson, formatCelebrateErrors } = require("./middlewares/ha
 const app = express();
 
 // mongodb
+const mongoUrl = process.env.MONGO_URL || process.env.DB_URL;
+console.log("Environment check:");
+console.log("- MONGO_URL exists:", !!process.env.MONGO_URL);
+console.log("- DB_URL exists:", !!process.env.DB_URL);
+console.log("- Using URL:", mongoUrl ? "YES" : "NO");
+
+if (!mongoUrl) {
+  console.error("❌ No MongoDB connection string found in environment variables!");
+  process.exit(1);
+}
+
 mongoose
-  .connect(process.env.DB_URL, {
+  .connect(mongoUrl, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(() => console.log("Connected to database"))
-  .catch((err) => console.error(err));
+  .then(() => {
+    console.log("✅ Connected to MongoDB successfully");
+    console.log("Database name:", mongoose.connection.db.databaseName);
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1);
+  });
 
 // global middlewares
 app.use(cors());

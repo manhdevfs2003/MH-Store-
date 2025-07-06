@@ -50,6 +50,11 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// Debug endpoint to test routing
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API routes working', timestamp: new Date().toISOString() });
+});
+
 // routes - chuẩn hóa tất cả với prefix /api
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

@@ -6,6 +6,11 @@ const { celebrate } = require("celebrate");
 const User = require("../models/User.model");
 const { auth: authSchema } = require("../models/schema");
 
+// Debug route
+router.get("/test", (req, res) => {
+  res.json({ message: "Auth routes working" });
+});
+
 router.post("/register", celebrate({ body: authSchema.register }), async (req, res) => {
   const { fullname, email, password } = req.body;
 

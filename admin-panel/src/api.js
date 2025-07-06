@@ -37,7 +37,8 @@ export async function del(path) {
   return await res.json();
 }
 async function loginUser({ email, password }) {
-  const resp = await fetch(API_URL + "/api/auth/login", {
+  // Temporarily use test endpoint
+  const resp = await fetch(API_URL + "/api/auth/login-test", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

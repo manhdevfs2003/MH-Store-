@@ -9,7 +9,7 @@ export default function ProductList() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await api.get("/products");
+        const res = await api.get("/api/products");
         if (Array.isArray(res)) {
           setProducts(res);
         } else {

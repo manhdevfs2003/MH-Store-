@@ -107,6 +107,8 @@ cd admin-panel
 npm install
 ```
 
+> **Lưu ý:** Dự án đã chuyển từ pnpm sang npm để tương thích tốt hơn với Vercel deployment.
+
 Tạo file `.env` trong thư mục `admin-panel`:
 
 ```env
@@ -144,16 +146,20 @@ npm run dev
 ### 🌍 **Production (Live Demo):**
 
 #### 🛍️ Client (Khách hàng):
+
 **URL:** [https://mh-store-client.vercel.app](https://mh-store-client.vercel.app)
 
 #### 👨‍💼 Admin Panel:
+
 **URL:** [https://mh-store-admin.vercel.app](https://mh-store-admin.vercel.app)
 
 **Tài khoản Admin:**
+
 - **Email:** `admintest@gmail.com`
 - **Mật khẩu:** `123456`
 
 #### ⚙️ API Backend:
+
 **URL:** [https://mh-store-api.onrender.com](https://mh-store-api.onrender.com)
 
 ---
@@ -161,9 +167,11 @@ npm run dev
 ### 💻 **Local Development:**
 
 #### 🛍️ Client (Khách hàng):
+
 **URL:** [http://localhost:3000](http://localhost:3000)
 
 #### 👨‍💼 Admin Panel:
+
 **URL:** [http://localhost:5174](http://localhost:5174)
 
 **Tính năng admin:**
@@ -282,6 +290,7 @@ admin-panel/
 ### **Production Setup:**
 
 #### **Backend (Render):**
+
 1. Create account tại [render.com](https://render.com)
 2. Connect GitHub repository
 3. Create Web Service:
@@ -291,6 +300,7 @@ admin-panel/
    - **Environment Variables:** MONGO_URL, JWT_SECRET, STRIPE_SECRET
 
 #### **Frontend (Vercel):**
+
 1. Create account tại [vercel.com](https://vercel.com)
 2. Import GitHub repository (2 lần cho admin và client)
 3. **Admin Panel:**
@@ -303,6 +313,7 @@ admin-panel/
    - **Environment:** `VITE_API_URL=https://mh-store-api.onrender.com`
 
 #### **Auto-Deploy:**
+
 - Mỗi push lên `main` branch sẽ tự động trigger deployment
 - Vercel và Render đều hỗ trợ preview deployments cho pull requests
 
@@ -333,14 +344,16 @@ Nếu bạn gặp vấn đề hoặc có câu hỏi, vui lòng:
 - Join Discord server (nếu có)
 
 ---
+
 =======
 
 ## Front-end
+
 - [React](https://es.reactjs.org/) - Front-End JavaScript library
 - [Windi CSS](https://windicss.org/) - Next generation utility-first CSS framework
 - [Feather Icons](https://feathericons.com/) - Simply beautiful open source icons
 - [Vite](https://vitejs.dev/) - Frontend Tooling
->>>>>>> f2b171ca723e543d145c1759a865e31019e356f4
+  > > > > > > > f2b171ca723e543d145c1759a865e31019e356f4
 
 ⭐ **Nếu project này hữu ích, hãy cho một star!** ⭐
 

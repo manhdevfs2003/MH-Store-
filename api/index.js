@@ -50,20 +50,13 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// routes
-app.use("/auth", authRouter);
-app.use("/users", userRouter);
-app.use("/products", productRouter);
-app.use("/carts", cartRouter);
-app.use("/orders", orderRouter);
-app.use("/checkout", checkoutRouter);
-const productRoutes = require("./routes/product");
-app.use("/api/products", productRoutes);
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/orders", orderRouter); // ✅ mount chuẩn cho FE gọi
-const userApiRouter = require("./routes/user");
-
-app.use("/api/users", userApiRouter);
+// routes - chuẩn hóa tất cả với prefix /api
+app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
+app.use("/api/carts", cartRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/checkout", checkoutRouter);
 // thiếu:
 
 // server status

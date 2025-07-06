@@ -7,7 +7,7 @@ export default function OrderList() {
 
   useEffect(() => {
                                 (async () => {
-                                  const res = await api.getAll("/orders"); // ✅ phải gọi đúng endpoint
+                                  const res = await api.getAll("/api/orders"); // ✅ phải gọi đúng endpoint
                                   if (Array.isArray(res)) setOrders(res);
                                 })();
                               }, []);

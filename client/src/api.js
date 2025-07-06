@@ -18,7 +18,7 @@ function getUser() {
 }
 
 async function registerUser({ fullname, email, password }) {
-  const resp = await fetch(API_URL + "/auth/register", {
+  const resp = await fetch(API_URL + "/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,7 +29,7 @@ async function registerUser({ fullname, email, password }) {
 }
 
 async function loginUser({ email, password }) {
-  const resp = await fetch(API_URL + "/auth/login", {
+  const resp = await fetch(API_URL + "/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function logoutUser() {
 }
 
 async function createUserCart(products) {
-  const resp = await fetch(API_URL + "/carts", {
+  const resp = await fetch(API_URL + "/api/carts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ async function getUserCart() {
 
   console.log("Access Token:", token); // 👈 dòng cần thêm để xem token
 
-  const resp = await fetch(API_URL + "/carts/" + userID, {
+  const resp = await fetch(API_URL + "/api/carts/" + userID, {
     headers: {
       "x-access-token": getAccessToken(),
     },
@@ -96,7 +96,7 @@ async function addProductsToCart(products) {
     quantity: p.quantity || 1,
   }));
 
-  const resp = await fetch(API_URL + "/carts/" + userID, {
+  const resp = await fetch(API_URL + "/api/carts/" + userID, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -115,7 +115,7 @@ async function removeProductFromCart(productID) {
 
 async function patchCart(productID, quantity) {
   const userID = getUser()._id;
-  const resp = await fetch(API_URL + "/carts/" + userID, {
+  const resp = await fetch(API_URL + "/api/carts/" + userID, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -127,7 +127,7 @@ async function patchCart(productID, quantity) {
 }
 
 async function clearCart() {
-  const resp = await fetch(API_URL + "/carts/clear", {
+  const resp = await fetch(API_URL + "/api/carts/clear", {
     method: "POST",
     headers: {
       "x-access-token": getAccessToken(),
@@ -137,7 +137,7 @@ async function clearCart() {
 }
 
 async function fetchUserDetails() {
-  const resp = await fetch(API_URL + "/users/me", {
+  const resp = await fetch(API_URL + "/api/users/me", {
     headers: {
       "x-access-token": getAccessToken(),
     },
@@ -153,7 +153,7 @@ async function fetchUserDetails() {
 }
 
 async function fetchProducts(category, newArrivals = false) {
-  const requestUrl = API_URL + "/products?" + `new=${newArrivals ? "true" : "false"}${category ? "&category=" + category : ""}`;
+  const requestUrl = API_URL + "/api/products?" + `new=${newArrivals ? "true" : "false"}${category ? "&category=" + category : ""}`;
 
   console.log("Đang gọi API:", requestUrl);
 
@@ -170,12 +170,12 @@ async function fetchProducts(category, newArrivals = false) {
 }
 
 async function fetchProduct(id) {
-  const resp = await fetch(API_URL + "/products/" + id);
+  const resp = await fetch(API_URL + "/api/products/" + id);
   return await resp.json();
 }
 
 async function proceedCheckout() {
-  const resp = await fetch(API_URL + "/checkout/payment", {
+  const resp = await fetch(API_URL + "/api/checkout/payment", {
     headers: {
       "Content-Type": "application/json",
       "x-access-token": getAccessToken(),
@@ -186,7 +186,7 @@ async function proceedCheckout() {
 
 // on production create the order using stripe webhooks
 async function createOrder(products, amount, address) {
-  const resp = await fetch(API_URL + "/orders", {
+  const resp = await fetch(API_URL + "/api/orders", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -203,7 +203,7 @@ async function createOrder(products, amount, address) {
 
 async function fetchAllOrders() {
   const userID = getUser()._id;
-  const resp = await fetch(API_URL + "/orders/user/" + userID, {
+  const resp = await fetch(API_URL + "/api/orders/user/" + userID, {
     headers: {
       "x-access-token": getAccessToken(),
     },
@@ -212,7 +212,7 @@ async function fetchAllOrders() {
 }
 
 async function fetchOrderDetails(orderID) {
-  const resp = await fetch(API_URL + "/orders/" + orderID, {
+  const resp = await fetch(API_URL + "/api/orders/" + orderID, {
     headers: {
       "x-access-token": getAccessToken(),
     },

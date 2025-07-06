@@ -17,7 +17,7 @@ export default function EditProduct() {
 
   useEffect(() => {
     (async () => {
-      const res = await api.get(`/products/${id}`)
+      const res = await api.get(`/api/products/${id}`)
       setProduct(res)
       setFormData({
         title: res.title || "",

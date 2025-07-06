@@ -37,7 +37,7 @@ export async function del(path) {
   return await res.json();
 }
 async function loginUser({ email, password }) {
-  const resp = await fetch(API_URL + "/auth/login", {
+  const resp = await fetch(API_URL + "/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ async function loginUser({ email, password }) {
   return data;
 }
 async function deleteProduct(productID) {
-  const resp = await fetch(`${API_URL}/products/${productID}`, {
+  const resp = await fetch(`${API_URL}/api/products/${productID}`, {
     method: "DELETE",
     headers: {
       "x-access-token": localStorage.getItem("accessToken"), // nếu cần xác thực
@@ -72,7 +72,7 @@ async function deleteProduct(productID) {
 }
 
 async function updateProduct(id, data) {
-  const res = await fetch(`${API_URL}/products/${id}`, {
+  const res = await fetch(`${API_URL}/api/products/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -87,7 +87,7 @@ async function updateProduct(id, data) {
 // ✅ Thêm sản phẩm mới
 async function addProduct(data) {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch(`${API_URL}/products`, {
+  const res = await fetch(`${API_URL}/api/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -110,7 +110,7 @@ async function getAll(path) {
 }
 async function getOrderDetail(orderId) {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch(`${API_URL}/orders/${orderId}`, {
+  const res = await fetch(`${API_URL}/api/orders/${orderId}`, {
     headers: {
       "Content-Type": "application/json",
       "x-access-token": token,
@@ -133,7 +133,7 @@ async function putOrder(path, data) {
 // ✅ Lấy tất cả người dùng
 async function getUsers() {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch(`${API_URL}/users`, {
+  const res = await fetch(`${API_URL}/api/users`, {
     headers: {
       "Content-Type": "application/json",
       "x-access-token": token,
@@ -145,7 +145,7 @@ async function getUsers() {
 // ✅ Lấy 1 người dùng theo ID
 async function getUser(id) {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch(`${API_URL}/users/${id}`, {
+  const res = await fetch(`${API_URL}/api/users/${id}`, {
     headers: {
       "Content-Type": "application/json",
       "x-access-token": token,
@@ -157,7 +157,7 @@ async function getUser(id) {
 // ✅ Cập nhật user
 async function updateUser(id, data) {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch(`${API_URL}/users/${id}`, {
+  const res = await fetch(`${API_URL}/api/users/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -171,7 +171,7 @@ async function updateUser(id, data) {
 // ✅ Xoá user
 async function deleteUser(id) {
   const token = localStorage.getItem("adminToken");
-  const res = await fetch(`${API_URL}/users/${id}`, {
+  const res = await fetch(`${API_URL}/api/users/${id}`, {
     method: "DELETE",
     headers: {
       "x-access-token": token,
@@ -180,7 +180,7 @@ async function deleteUser(id) {
   return await res.json();
 }
 async function updateUserAsAdmin(id, data) {
-  const res = await fetch(`${API_URL}/users/admin/${id}`, {
+  const res = await fetch(`${API_URL}/api/users/admin/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -191,7 +191,7 @@ async function updateUserAsAdmin(id, data) {
   return await res.json();
 }
 async function getUserStats() {
-  const res = await fetch(`${API_URL}/users/stats`, {
+  const res = await fetch(`${API_URL}/api/users/stats`, {
     headers: {
       "x-access-token": localStorage.getItem("adminToken"),
     },
@@ -202,7 +202,7 @@ async function getOverviewStats() {
   const token = localStorage.getItem("adminToken");
   const headers = { "x-access-token": token };
 
-  const [users, orders, products] = await Promise.all([fetch(`${API_URL}/users`, { headers }).then((res) => res.json()), fetch(`${API_URL}/orders`, { headers }).then((res) => res.json()), fetch(`${API_URL}/products`, { headers }).then((res) => res.json())]);
+  const [users, orders, products] = await Promise.all([fetch(`${API_URL}/api/users`, { headers }).then((res) => res.json()), fetch(`${API_URL}/api/orders`, { headers }).then((res) => res.json()), fetch(`${API_URL}/api/products`, { headers }).then((res) => res.json())]);
 
   const totalRevenue = Array.isArray(orders) ? orders.reduce((sum, o) => sum + (o.amount || 0), 0) : 0;
 

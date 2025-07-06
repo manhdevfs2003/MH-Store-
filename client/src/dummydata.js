@@ -1,7 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
-    image: "https://images.pexels.com/photos/7973302/pexels-photo-7973302.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    image: "https://www.jcrew.com/brand_creative/homepage2025/07-Jul/2025jul_0701_w_hp_img5.jpg?wid=2400",
     title: "SUMMER SALE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "f5fafd",

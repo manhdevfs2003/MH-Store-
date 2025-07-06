@@ -11,6 +11,34 @@ router.get("/test", (req, res) => {
   res.json({ message: "Auth routes working" });
 });
 
+// Simple login test without celebrate
+router.post("/login-test", async (req, res) => {
+  const { email, password } = req.body;
+  console.log("Login attempt:", email);
+  
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+    
+    const isValidLogin = await bcrypt.compare(password, user.password);
+    if (isValidLogin) {
+      const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: "7d" });
+      return res.json({
+        message: "Login successful",
+        accessToken: token,
+        user: { id: user._id, email: user.email, isAdmin: user.isAdmin }
+      });
+    } else {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+});
+
 router.post("/register", celebrate({ body: authSchema.register }), async (req, res) => {
   const { fullname, email, password } = req.body;
 
